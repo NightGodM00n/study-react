@@ -3,6 +3,7 @@ import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import { Footer } from '../components/Footer';
 import { Main } from '../components/Main';
+import { Facebooks } from '../components/Facebooks';
 
 export default function Home() {
   return (
@@ -14,6 +15,8 @@ export default function Home() {
       </Head>
 
       <Main page="index"></Main>
+
+      {/* <Facebooks /> */}
 
       <Footer />
 
