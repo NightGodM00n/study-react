@@ -5,8 +5,17 @@ import { Footer } from 'src/components/Footer';
 import { Main } from 'src/components/Main';
 import { Facebooks } from 'src/components/Facebooks';
 import { Header } from 'src/components/Header';
+import { useCallback } from 'react';
 
 export default function Home() {
+  const item = 1;
+
+  const handleClick = useCallback( (e) => {
+    console.log(e.target.href)
+    e.preventDefault();
+    alert(item);
+  },[]);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -16,11 +25,16 @@ export default function Home() {
 
       <Header />
 
+      <a
+        href="/about"
+        onClick={handleClick}
+      >
+        ボタン
+      </a>
+
 
       <Main page="index"></Main>
-
       {/* <Facebooks /> */}
-
       <Footer />
 
     </div>
