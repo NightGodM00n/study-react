@@ -35,12 +35,7 @@ export default function Home() {
 
       <Header />
 
-      <a
-        href="/about"
-        onClick={handleClick}
-      > 
-        ボタン
-      </a>
+
 
 
       <Main page="index"></Main>
