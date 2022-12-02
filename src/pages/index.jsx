@@ -5,7 +5,7 @@ import { Footer } from 'src/components/Footer';
 import { Main } from 'src/components/Main';
 import { Facebooks } from 'src/components/Facebooks';
 import { Header } from 'src/components/Header';
-import { useCallback } from 'react';
+import { useCallback,useEffect } from 'react';
 
 export default function Home() {
   const item = 1;
@@ -14,6 +14,16 @@ export default function Home() {
     console.log(e.target.href)
     e.preventDefault();
     alert(item);
+  },[]);
+
+  useEffect(() =>{
+    console.log("マウント時");
+    document.body.style.backgroundColor = "lightblue";
+
+    return ()=>{
+      console.log("アンマウント時");
+      document.body.style.backgroundColor = "";
+    }
   },[]);
 
   return (
@@ -28,7 +38,7 @@ export default function Home() {
       <a
         href="/about"
         onClick={handleClick}
-      >
+      > 
         ボタン
       </a>
 
@@ -38,5 +48,5 @@ export default function Home() {
       <Footer />
 
     </div>
-  )
+  );
 }
