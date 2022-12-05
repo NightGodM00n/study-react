@@ -5,23 +5,23 @@ import { Footer } from 'src/components/Footer';
 import { Main } from 'src/components/Main';
 import { Facebooks } from 'src/components/Facebooks';
 import { Header } from 'src/components/Header';
-import { useCallback,useEffect } from 'react';
+import { useEffect,useState } from 'react';
 
 export default function Home() {
-  const item = 1;
+  //配列分割代入
+  const [item , setItem ] = useState(1);
 
-  const handleClick = useCallback( (e) => {
-    console.log(e.target.href)
-    e.preventDefault();
-    alert(item);
-  },[]);
+  const handleClick =  (e) => {
+    setItem((item) => item +1);
+    setItem((item) => item +1);
+  };
 
   useEffect(() =>{
-    console.log("マウント時");
+    // console.log("マウント時");
     document.body.style.backgroundColor = "lightblue";
 
     return ()=>{
-      console.log("アンマウント時");
+      // console.log("アンマウント時");
       document.body.style.backgroundColor = "";
     }
   },[]);
@@ -35,7 +35,9 @@ export default function Home() {
 
       <Header />
 
-      <a href="" onClick={handleClick}>ボタン</a>
+      <h1>{item}</h1>
+
+      <button onClick={handleClick}>ボタン</button>
 
       <Main page="index"></Main>
       {/* <Facebooks /> */}
