@@ -5,16 +5,18 @@ import { Footer } from 'src/components/Footer';
 import { Main } from 'src/components/Main';
 import { Facebooks } from 'src/components/Facebooks';
 import { Header } from 'src/components/Header';
-import { useEffect,useState } from 'react';
+import { useEffect,useState,useCallback } from 'react';
 
 export default function Home() {
   //配列分割代入
   const [item , setItem ] = useState(1);
 
-  const handleClick =  (e) => {
-    setItem((item) => item +1);
-    setItem((item) => item +1);
-  };
+  const handleClick =  useCallback((e) => {
+    if(item<10){
+      setItem((item) => item +1);
+    }
+    // setItem((item) => item +1);
+  },[item]);
 
   useEffect(() =>{
     // console.log("マウント時");
