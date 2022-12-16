@@ -5,28 +5,44 @@ import { Footer } from 'src/components/Footer';
 import { Main } from 'src/components/Main';
 import { Facebooks } from 'src/components/Facebooks';
 import { Header } from 'src/components/Header';
-import { useEffect,useState,useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 export default function Home() {
   //配列分割代入
-  const [item , setItem ] = useState(1);
+  const [item, setItem] = useState(1);
+  const [text, setText] = useState("");
+  const [isShow, setIsShow] = useState(true);
 
-  const handleClick =  useCallback((e) => {
-    if(item<10){
-      setItem((item) => item +1);
+  const handleClick = useCallback(() => {
+    if (item < 10) {
+      setItem((item) => item + 1);
     }
     // setItem((item) => item +1);
-  },[item]);
+  }, [item]);
 
-  useEffect(() =>{
+  const handleDisplay = useCallback(() => {
+    setIsShow((isShow) => !isShow);
+  }, []);
+
+  const handleChange = useCallback((e) => {
+    if (e.target.value.length > 5) {
+      alert("error");
+      return;
+    }
+    setText(e.target.value.trim());
+  }, []);
+  
+  useEffect(() => {
     // console.log("マウント時");
     document.body.style.backgroundColor = "lightblue";
 
-    return ()=>{
+    return () => {
       // console.log("アンマウント時");
       document.body.style.backgroundColor = "";
     }
-  },[]);
+  }, []);
+
+
 
   return (
     <div className={styles.container}>
@@ -37,9 +53,11 @@ export default function Home() {
 
       <Header />
 
-      <h1>{item}</h1>
+      {isShow ? <h1>{item}</h1> : null}
 
       <button onClick={handleClick}>ボタン</button>
+      <button onClick={handleDisplay}>{isShow ? "非表示" : "表示"}</button>
+      <input type="text" value={text} onChange={handleChange} />
 
       <Main page="index"></Main>
       {/* <Facebooks /> */}
