@@ -15,13 +15,13 @@ export default function Home() {
 
   const handleClick = useCallback(() => {
     if (item < 10) {
-      setItem((item) => item + 1);
+      setItem((previtem) => previtem + 1);
     }
     // setItem((item) => item +1);
   }, [item]);
 
   const handleDisplay = useCallback(() => {
-    setIsShow((isShow) => !isShow);
+    setIsShow((previsShow) => !previsShow);
   }, []);
 
   const handleChange = useCallback((e) => {
