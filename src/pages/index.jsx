@@ -5,55 +5,16 @@ import { Footer } from 'src/components/Footer';
 import { Main } from 'src/components/Main';
 import { Facebooks } from 'src/components/Facebooks';
 import { Header } from 'src/components/Header';
-import { useEffect, useState, useCallback } from 'react';
+import { useCounter } from 'src/hooks/useCounter';
+import { useInputArray } from 'src/hooks/useInputArray';
+import { useBgLightBlue } from 'src/hooks/useBgLightBlue';
+
+
 
 export default function Home() {
-  //配列分割代入
-  const [item, setItem] = useState(1);
-  const [text, setText] = useState("");
-  const [isShow, setIsShow] = useState(true);
-  const [array, setArray] = useState([]);
-
-  const handleClick = useCallback(() => {
-    if (item < 10) {
-      setItem((previtem) => previtem + 1);
-    }
-    // setItem((item) => item +1);
-  }, [item]);
-
-  const handleDisplay = useCallback(() => {
-    setIsShow((previsShow) => !previsShow);
-  }, []);
-
-  const handleChange = useCallback((e) => {
-    if (e.target.value.length > 5) {
-      alert("error");
-      return;
-    }
-    setText(e.target.value.trim());
-  }, []);
-
-  const handleAdd = useCallback(() => {
-    setArray((prevArray) => {
-      if(prevArray.some((item)=> item === text)){
-        alert("same");
-        return prevArray;
-      }
-      return [...prevArray,text];
-    });
-  }, [text]);
-
-  useEffect(() => {
-    // console.log("マウント時");
-    document.body.style.backgroundColor = "lightblue";
-
-    return () => {
-      // console.log("アンマウント時");
-      document.body.style.backgroundColor = "";
-    }
-  }, []);
-
-
+  const {item, isShow, handleClick, handleDisplay} = useCounter();
+  const {text,array,handleChange,handleAdd} = useInputArray();
+  useBgLightBlue();
 
   return (
     <div className={styles.container}>
@@ -65,9 +26,9 @@ export default function Home() {
       <Header />
 
       {isShow ? <h1>{item}</h1> : null}
-
       <button onClick={handleClick}>ボタン</button>
       <button onClick={handleDisplay}>{isShow ? "非表示" : "表示"}</button>
+
       <input type="text" value={text} onChange={handleChange} />
       <button onClick={handleAdd}>追加</button>
       <ul>
