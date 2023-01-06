@@ -6,17 +6,17 @@ import { Main } from 'src/components/Main';
 import { Facebooks } from 'src/components/Facebooks';
 import { Header } from 'src/components/Header';
 
-export default function Home(props) {
-  const {
-    item,
-    isShow,
-    handleClick,
-    handleDisplay,
-    text,
-    array,
-    handleChange,
-    handleAdd,
-  } = props;
+const  Home = (props) =>{
+  // const {
+  //   item,
+  //   isShow,
+  //   handleClick,
+  //   handleDisplay,
+  //   text,
+  //   array,
+  //   handleChange,
+  //   handleAdd,
+  // } = props;
 
   return (
     <div className={styles.container}>
@@ -27,14 +27,14 @@ export default function Home(props) {
 
       <Header />
 
-      {isShow ? <h1>{item}</h1> : null}
-      <button onClick={handleClick}>ボタン</button>
-      <button onClick={handleDisplay}>{isShow ? "非表示" : "表示"}</button>
+      {props.isShow ? <h1>{props.item}</h1> : null}
+      <button onClick={props.handleClick}>ボタン</button>
+      <button onClick={props.handleDisplay}>{props.isShow ? "非表示" : "表示"}</button>
 
-      <input type="text" value={text} onChange={handleChange} />
-      <button onClick={handleAdd}>追加</button>
+      <input type="text" value={props.text} onChange={props.handleChange} />
+      <button onClick={props.handleAdd}>追加</button>
       <ul>
-        {array.map((item) => {
+        {props.array.map((item) => {
           return <li key={item}>{item}</li>
         })}
       </ul>
@@ -45,4 +45,6 @@ export default function Home(props) {
 
     </div>
   );
-}
+};
+
+export default Home;
